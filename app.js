@@ -85,7 +85,7 @@ function createRecordEl(album, key) {
       '<div class="tt-reader">Added by ' + escapeHtml(album.reader) + '</div>' +
       '<div class="tt-actions">' + actionsHtml + '</div>' +
       '<div class="tt-actions tt-search-actions">' +
-        '<a href="https://music.apple.com/search?term=' + encodeURIComponent(album.artist + ' ' + album.title) + '" target="_blank" rel="noopener" class="tt-link tt-apple">Search Apple</a>' +
+        '<a href="https://music.apple.com/us/search?term=' + encodeURIComponent(album.title + ' ' + album.artist) + '" target="_blank" rel="noopener" class="tt-link tt-apple">Search Apple</a>' +
         '<a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(album.artist + ' ' + album.title) + '" target="_blank" rel="noopener" class="tt-link tt-youtube">Search YouTube</a>' +
       '</div>' +
       '<div class="tt-actions tt-manage-actions">' +
