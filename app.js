@@ -255,8 +255,12 @@ descInput.addEventListener('input', function() { charCount.textContent = descInp
 
 function fetchArtwork(title, artist) {
   var query = encodeURIComponent(artist + ' ' + title);
-  var url = 'https://itunes.apple.com/search?term=' + query + '&media=music&entity=album&limit=1';
-  return fetch(url)
+
+  // Search both album and song, take whichever returns first result
+  var albumUrl = 'https://itunes.apple.com/search?term=' + query + '&media=music&entity=album&limit=1';
+  var songUrl = 'https://itunes.apple.com/search?term=' + query + '&media=music&entity=song&limit=1';
+
+  return fetch(albumUrl)
     .then(function(res) { return res.json(); })
     .then(function(data) {
       if (data.results && data.results.length > 0) {
@@ -265,9 +269,23 @@ function fetchArtwork(title, artist) {
           genre: data.results[0].primaryGenreName || 'Other'
         };
       }
-      return { artwork: '', genre: 'Other' };
+      // Fallback to song search
+      return fetch(songUrl)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.results && data.results.length > 0) {
+            return {
+              artwork: data.results[0].artworkUrl100.replace('100x100', '600x600'),
+              genre: data.results[0].primaryGenreName || 'Other'
+            };
+          }
+          return { artwork: '', genre: 'Other' };
+        });
     })
-    .catch(function() { return { artwork: '', genre: 'Other' }; });
+    .catch(function(err) {
+      console.error('Artwork fetch failed:', err);
+      return { artwork: '', genre: 'Other' };
+    });
 }
 
 form.addEventListener('submit', function(e) {
