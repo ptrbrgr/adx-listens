@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADX Listens</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>🎵 ADX Listens</h1>
+      <p class="subtitle">Share what you're listening to</p>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" id="sidebar">
+        <h3 class="sidebar-title">Genres</h3>
+        <button class="genre-filter active" data-genre="all">All</button>
+      </aside>
+
+      <main class="main-content">
+        <div class="top-bar">
+          <button class="add-record-btn" id="addRecordBtn" aria-label="Add a song or album">
+            <span class="plus">+</span>
+            <span class="btn-label">Add Music</span>
+          </button>
+        </div>
+
+        <div class="record-crate">
+          <div class="crate" id="crate">
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <h2 id="modalTitle">Add a Song or Album</h2>
+      <form id="albumForm">
+        <label for="albumType">Type</label>
+        <select id="albumType">
+          <option value="song">Song</option>
+          <option value="album">Album</option>
+        </select>
+
+        <label for="albumTitle">Title</label>
+        <input type="text" id="albumTitle" required maxlength="80" placeholder="e.g. Bohemian Rhapsody">
+
+        <label for="albumArtist">Artist</label>
+        <input type="text" id="albumArtist" required maxlength="80" placeholder="e.g. Queen">
+
+        <label for="albumDesc">Quick Take <span class="optional">(optional)</span> <span class="char-count">(<span id="charCount">0</span>/140)</span></label>
+        <textarea id="albumDesc" maxlength="140" rows="2" placeholder="Why should people listen to this?"></textarea>
+
+        <label for="albumReader">Your Alias</label>
+        <input type="text" id="albumReader" required maxlength="40" placeholder="e.g. ptrbrgr">
+
+        <label for="albumLink">Spotify Link <span class="optional">(optional)</span></label>
+        <input type="url" id="albumLink" placeholder="https://open.spotify.com/...">
+
+        <label for="appleLink">Apple Music Link <span class="optional">(optional)</span></label>
+        <input type="url" id="appleLink" placeholder="https://music.apple.com/...">
+
+        <label for="youtubeLink">YouTube Music Link <span class="optional">(optional)</span></label>
+        <input type="url" id="youtubeLink" placeholder="https://music.youtube.com/...">
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn-submit">Drop the Needle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
